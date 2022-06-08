@@ -1,0 +1,63 @@
+@import '../../scss/variables.scss';
+@import '../../scss/mediaQueries.scss';
+
+.nav {
+  grid-row: span 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 3.5rem 0;
+  background: $semiDarkBlue;
+  height: 96rem;
+  border-radius: 20px;
+  overflow: hidden;
+
+  @include breakpoint(lg) {
+    height: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2.4rem 2.4rem;
+  }
+
+  nav {
+    flex: 2;
+    margin-top: 7.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+
+    @include breakpoint(lg) {
+      flex: initial;
+      flex-direction: row;
+      margin-top: 0;
+    }
+
+    @include breakpoint(sm) {
+      gap: 2rem;
+    }
+
+    .navIcon {
+      color: $greyishBlue;
+      transition: all 200ms ease-in;
+    }
+
+    .navIcon:hover,
+    .navIcon:active {
+      color: $red;
+    }
+
+    .active .navIcon {
+      color: $white;
+    }
+  }
+
+  .avatar {
+    margin-bottom: 1rem;
+    width: 4rem;
+
+    @include breakpoint(lg) {
+      margin-bottom: 0;
+    }
+  }
+}

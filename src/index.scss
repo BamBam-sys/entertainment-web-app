@@ -1,0 +1,25 @@
+@import './scss/mediaQueries.scss';
+
+// resets
+@import './scss/resets.scss';
+
+// font
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500&display=swap');
+
+// re-usable styles
+.container {
+  max-width: 138rem;
+  width: 95%;
+  margin: 3.2rem auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 9.6rem 1fr;
+  column-gap: 3.6rem;
+  row-gap: 3rem;
+
+  @include breakpoint(lg) {
+    grid-template-columns: 1fr;
+  }
+}

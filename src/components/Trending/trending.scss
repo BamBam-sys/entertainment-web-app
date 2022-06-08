@@ -1,0 +1,22 @@
+@import '../../scss/mediaQueries.scss';
+
+.trendingSection {
+  height: 29.5rem;
+  position: relative;
+
+  .carousel {
+    margin-top: 2.5rem;
+    cursor: grab;
+    position: absolute;
+    overflow-x: hidden;
+
+    .innerCarousel {
+      display: flex;
+      gap: 4rem;
+
+      @include breakpoint(sm) {
+        gap: 1.6rem;
+      }
+    }
+  }
+}

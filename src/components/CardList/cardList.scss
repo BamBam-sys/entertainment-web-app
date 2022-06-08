@@ -1,0 +1,24 @@
+@import '../../scss/mediaQueries.scss';
+
+.list {
+  // margin-top: 4rem;
+  justify-self: start;
+  width: 100%;
+
+  .cards {
+    margin-top: 3.2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4rem;
+
+    @include breakpoint(md) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+    }
+
+    @include breakpoint(sm) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+  }
+}

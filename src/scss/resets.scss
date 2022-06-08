@@ -1,0 +1,72 @@
+@import './variables.scss';
+
+@import './mediaQueries.scss';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+  font-size: 62.5%;
+  font-family: 'Outfit', sans-serif;
+  color: $white;
+
+  @include breakpoint(xl) {
+    font-size: 56.25%;
+  }
+
+  @include breakpoint(lg) {
+    font-size: 50%;
+  }
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  background: $darkBlue;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+#root,
+#__next {
+  isolation: isolate;
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+}
