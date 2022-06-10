@@ -5,7 +5,7 @@ import CardList from './CardList/CardList';
 import Heading from './Heading/Heading';
 import TrendingCard from './TrendingCard/TrendingCard';
 import RegularCard from './RegularCard/RegularCard';
-import MoviesList from './MoviesList/MoviesList';
+import Search from './Search/Search';
 
 export {
   Nav,
@@ -15,5 +15,5 @@ export {
   CardList,
   Heading,
   RegularCard,
-  MoviesList,
+  Search,
 };

@@ -1,16 +1,23 @@
 import React from 'react';
-import { Nav, CardList, SearchInput } from '../../components';
-import data from '../../data.json';
+import { Nav, CardList, SearchInput, Search } from '../../components';
+import { useSelector } from 'react-redux';
 import './movies.scss';
+import { selectMovies, selectSearching } from './../../store/showsSlice';
 
 const Movies = () => {
-  const movies = data.filter((item) => item.category === 'Movie');
+  const state = useSelector((state) => state);
+  const movies = selectMovies(state);
+  const searching = selectSearching(state);
 
   return (
     <div className="movies grid container">
       <Nav />
       <SearchInput placeholder={'Search for movies'} />
-      <CardList data={movies} headingText={'Movies'} />
+      {searching ? (
+        <Search data={movies} />
+      ) : (
+        <CardList data={movies} headingText={'Movies'} />
+      )}
     </div>
   );
 };

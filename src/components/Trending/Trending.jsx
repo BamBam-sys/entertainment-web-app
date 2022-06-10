@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import data from '../../data.json';
-import './trending.scss';
 import { TrendingCard, Heading } from '../../components';
+import './trending.scss';
 
-const Trending = () => {
+const Trending = ({ data }) => {
   const [width, setWidth] = useState(0);
   const carouselRef = useRef();
 
