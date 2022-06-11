@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { TrendingCard, Heading } from '../../components';
+import data from '../../data.json';
 import './trending.scss';
+import { TrendingCard, Heading } from '../../components';
 
-const Trending = ({ data }) => {
+const Trending = () => {
   const [width, setWidth] = useState(0);
   const carouselRef = useRef();
 
@@ -14,7 +15,7 @@ const Trending = ({ data }) => {
   const trending = data.filter((item) => item.isTrending === true);
   return (
     <div className="trendingSection" ref={carouselRef}>
-      <Heading text={'Trending'} />
+      <Heading text={'trending'} />
       <motion.div className="carousel">
         <motion.div
           drag="x"
