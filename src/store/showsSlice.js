@@ -15,9 +15,7 @@ const showsSlice = createSlice({
       shows.list = action.payload;
     },
     search: (shows, action) => {
-      const { isSearching, input } = action.payload;
-      shows.searching = isSearching;
-      shows.searchParams = input;
+      shows.searching = action.payload;
     },
     bookmark: (shows, action) => {},
   },

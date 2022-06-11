@@ -4,8 +4,9 @@ import { search } from '../../store/showsSlice';
 import searchIcon from '../../assets/icon-search.svg';
 import './searchInput.scss';
 import { selectSearching } from './../../store/showsSlice';
+import Search from '../Search/Search';
 
-const SearchInput = ({ placeholder }) => {
+const SearchInput = ({ placeholder, data: shows }) => {
   const dispatch = useDispatch();
 
   const searching = useSelector((state) => selectSearching(state));
@@ -18,19 +19,23 @@ const SearchInput = ({ placeholder }) => {
 
   useEffect(() => {
     if (input === '') {
-      dispatch(search({ isSearching: false, input }));
+      dispatch(search(false));
     } else {
-      !searching && dispatch(search({ isSearching: true, input }));
+      !searching && dispatch(search(true));
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [input]);
 
   return (
-    <div className="search">
-      <img className="icon" src={searchIcon} alt="icon" />
-      <input type="text" placeholder={placeholder} onChange={handleChange} />
-    </div>
+    <>
+      <div className="search">
+        <img className="icon" src={searchIcon} alt="icon" />
+        <input type="text" placeholder={placeholder} onChange={handleChange} />
+      </div>
+
+      {searching && <Search data={shows} input={input} />}
+    </>
   );
 };
 

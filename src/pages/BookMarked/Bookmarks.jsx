@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardList, Nav, Search, SearchInput } from '../../components';
+import { CardList, Nav, SearchInput } from '../../components';
 import { useSelector } from 'react-redux';
 import {
   selectBookmarkedMovies,
@@ -13,13 +13,16 @@ const Bookmarked = () => {
   const tvSeries = selectBookmarkedTvSeries(state);
   const searching = selectSearching(state);
 
+  console.log('hi');
+
   return (
     <div className="container grid">
       <Nav />
-      <SearchInput placeholder={'Search for bookmarked shows'} />
-      {searching ? (
-        <Search data={[...movies, ...tvSeries]} />
-      ) : (
+      <SearchInput
+        placeholder={'Search for bookmarked shows'}
+        data={[...movies, ...tvSeries]}
+      />
+      {!searching && (
         <>
           <CardList data={movies} headingText={'Bookmarked Movies'} />
           <CardList data={tvSeries} headingText={'Bookmarked TV Series'} />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardList, Nav, Search, SearchInput, Trending } from '../../components';
+import { CardList, Nav, SearchInput, Trending } from '../../components';
 import { useSelector } from 'react-redux';
 import './home.scss';
 import {
@@ -15,15 +15,14 @@ const Home = () => {
   const trending = selectTrendingShows(state);
   const searching = selectSearching(state);
 
-  // console.log('Home rendered');
-
   return (
     <div className="home container grid">
       <Nav />
-      <SearchInput placeholder={'Search for movies or TV series'} />
-      {searching ? (
-        <Search data={shows} />
-      ) : (
+      <SearchInput
+        placeholder={'Search for movies or TV series'}
+        data={shows}
+      />
+      {!searching && (
         <>
           <Trending data={trending} />
           <CardList data={shows} headingText={'recommended for you'} />
