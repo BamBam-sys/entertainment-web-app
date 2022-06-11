@@ -14,7 +14,7 @@ const Trending = ({ data }) => {
   const trending = data.filter((item) => item.isTrending === true);
   return (
     <div className="trendingSection" ref={carouselRef}>
-      <Heading text={'trending'} />
+      <Heading text={'Trending'} />
       <motion.div className="carousel">
         <motion.div
           drag="x"

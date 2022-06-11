@@ -25,7 +25,7 @@ const Home = () => {
       {!searching && (
         <>
           <Trending data={trending} />
-          <CardList data={shows} headingText={'recommended for you'} />
+          <CardList data={shows} headingText={'Recommended for you'} />
         </>
       )}
     </div>

@@ -1,10 +1,21 @@
 import React from 'react';
+import CardList from '../CardList/CardList';
 
-const Search = ({ data, input }) => {
-  console.log(data);
-  console.log(input);
+const Search = ({ data: shows, input }) => {
+  const filteredShows = shows.filter((show) =>
+    show.title.toLowerCase().replace(/ /g, '').includes(input?.toLowerCase())
+  );
 
-  return <div style={{ border: '1px solid green' }}>Search</div>;
+  const text =
+    filteredShows.length === 0
+      ? `Found no results for '${input}'`
+      : `Found ${filteredShows.length} results for '${input}' `;
+
+  return (
+    <div>
+      <CardList data={filteredShows} headingText={text} />
+    </div>
+  );
 };
 
 export default Search;
