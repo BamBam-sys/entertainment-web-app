@@ -1,18 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import data from '../../data.json';
 import './trending.scss';
 import { TrendingCard, Heading } from '../../components';
+import { selectTrendingShows } from '../../store/showsSlice';
+import { useSelector } from 'react-redux';
 
 const Trending = () => {
+  const state = useSelector((state) => state);
+  const trending = selectTrendingShows(state);
+  // const trending = data.filter((item) => item.isTrending === true);
+
   const [width, setWidth] = useState(0);
+
   const carouselRef = useRef();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    setWidth(carouselRef.current.scrollWidth - carouselRef.current.offsetWidth);
-  }, []);
+    setWidth(
+      carouselRef.current?.scrollWidth - carouselRef.current?.offsetWidth
+    );
+  });
 
-  const trending = data.filter((item) => item.isTrending === true);
   return (
     <div className="trendingSection" ref={carouselRef}>
       <Heading text={'Trending'} />
