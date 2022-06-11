@@ -13,8 +13,6 @@ const Bookmarked = () => {
   const tvSeries = selectBookmarkedTvSeries(state);
   const searching = selectSearching(state);
 
-  console.log('hi');
-
   return (
     <div className="container grid">
       <Nav />

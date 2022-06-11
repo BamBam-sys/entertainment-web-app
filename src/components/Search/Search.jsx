@@ -9,7 +9,9 @@ const Search = ({ data: shows, input }) => {
   const text =
     filteredShows.length === 0
       ? `Found no results for '${input}'`
-      : `Found ${filteredShows.length} results for '${input}' `;
+      : `Found ${filteredShows.length} result${
+          filteredShows.length > 1 ? 's' : ''
+        } for '${input}' `;
 
   return (
     <div>

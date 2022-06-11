@@ -6,8 +6,12 @@ import { ReactComponent as BookmarkIconFull } from './../../assets/icon-bookmark
 import { ReactComponent as PlayIcon } from './../../assets/icon-play.svg';
 
 import './regularCard.scss';
+import { bookmark } from '../../store/showsSlice';
+import { useDispatch } from 'react-redux';
 
 const RegularCard = ({ item }) => {
+  const dispatch = useDispatch();
+
   const {
     title,
     category,
@@ -38,9 +42,15 @@ const RegularCard = ({ item }) => {
         </span>
         <span className="icon">
           {isBookmarked ? (
-            <BookmarkIconFull className="bookmarkIcon" />
+            <BookmarkIconFull
+              className="bookmarkIcon"
+              onClick={() => dispatch(bookmark(title))}
+            />
           ) : (
-            <BookmarkIconEmpty className="bookmarkIcon" />
+            <BookmarkIconEmpty
+              className="bookmarkIcon"
+              onClick={() => dispatch(bookmark(title))}
+            />
           )}
         </span>
       </div>

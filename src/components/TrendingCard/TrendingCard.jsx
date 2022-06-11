@@ -3,12 +3,15 @@ import { motion } from 'framer-motion';
 import { ReactComponent as BookmarkIconEmpty } from './../../assets/icon-bookmark-empty.svg';
 import { ReactComponent as BookmarkIconFull } from './../../assets/icon-bookmark-full.svg';
 import { ReactComponent as PlayIcon } from './../../assets/icon-play.svg';
+import { bookmark } from '../../store/showsSlice';
+import { useDispatch } from 'react-redux';
 import movieIcon from './../../assets/icon-category-movie.svg';
 import tvSeriesIcon from './../../assets/icon-category-tv.svg';
 
 import './trendingCard.scss';
 
 const TrendingCard = ({ item }) => {
+  const dispatch = useDispatch();
   const {
     title,
     category,
@@ -34,9 +37,15 @@ const TrendingCard = ({ item }) => {
     >
       <span className="icon">
         {isBookmarked ? (
-          <BookmarkIconFull className="bookmarkIcon" />
+          <BookmarkIconFull
+            className="bookmarkIcon"
+            onClick={() => dispatch(bookmark(title))}
+          />
         ) : (
-          <BookmarkIconEmpty className="bookmarkIcon" />
+          <BookmarkIconEmpty
+            className="bookmarkIcon"
+            onClick={() => dispatch(bookmark(title))}
+          />
         )}
       </span>
       <span className="play">

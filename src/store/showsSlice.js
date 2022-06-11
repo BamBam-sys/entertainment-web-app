@@ -17,7 +17,12 @@ const showsSlice = createSlice({
     search: (shows, action) => {
       shows.searching = action.payload;
     },
-    bookmark: (shows, action) => {},
+    bookmark: (shows, action) => {
+      const index = shows.list.findIndex(
+        (show) => show.title === action.payload
+      );
+      shows.list[index].isBookmarked = !shows.list[index].isBookmarked;
+    },
   },
 });
 
