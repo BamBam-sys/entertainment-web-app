@@ -1,0 +1,65 @@
+@import '../../scss/variables.scss';
+
+.signUp {
+  max-width: 40rem;
+  width: 90%;
+  margin: 7.84rem auto 0;
+  font-size: 1.5rem;
+
+  .logo {
+    margin: 0 auto 8.3rem;
+  }
+
+  p {
+    text-align: center;
+    margin-top: 2.4rem;
+    span {
+      color: $red;
+      cursor: pointer;
+    }
+  }
+
+  .signUpForm {
+    background: $semiDarkBlue;
+    padding: 3.2rem;
+    border-radius: 20px;
+
+    .form {
+      margin-top: 4rem;
+
+      input {
+        width: 100%;
+        padding: 1rem 1.7rem;
+        background: transparent;
+        color: $white;
+        caret-color: $red;
+        border: transparent;
+        border-bottom: 1px solid $greyishBlue;
+        font-weight: 300;
+        margin-bottom: 2.4rem;
+        transition: all 500ms ease;
+
+        &:focus {
+          outline: none;
+          border-bottom: 1px solid $white;
+        }
+      }
+
+      .btn {
+        width: 100%;
+        background: $red;
+        color: $white;
+        cursor: pointer;
+        padding: 1.5rem 0;
+        border: none;
+        border-radius: 6px;
+        transition: all 500ms ease;
+
+        &:hover {
+          background: $white;
+          color: $darkBlue;
+        }
+      }
+    }
+  }
+}
