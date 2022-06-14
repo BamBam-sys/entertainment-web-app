@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import movieIcon from './../../assets/icon-category-movie.svg';
 import tvSeriesIcon from './../../assets/icon-category-tv.svg';
 
+import styled from 'styled-components';
 import './trendingCard.scss';
 
 const TrendingCard = ({ item }) => {
@@ -19,21 +20,17 @@ const TrendingCard = ({ item }) => {
     rating,
     year,
     thumbnail: {
-      trending: {
-        // small: smallBackground,
-        large: largeBackground,
-      },
+      trending: { small: smallBackground, large: largeBackground },
     },
   } = item;
 
-  const style = {
-    backgroundImage: `url(${largeBackground})`,
-    backgroundPosition: 'center',
-    backgroundSize: 'cover',
+  const bgStyles = {
+    large: `url(${largeBackground})`,
+    small: `url(${smallBackground})`,
   };
 
   return (
-    <motion.div className="trendingCard" style={style}>
+    <Background className="trendingCard" bg={bgStyles}>
       <span className="icon">
         {isBookmarked ? (
           <BookmarkIconFull
@@ -68,8 +65,20 @@ const TrendingCard = ({ item }) => {
         </div>
         <div className="title">{title}</div>
       </div>
-    </motion.div>
+    </Background>
   );
 };
 
 export default TrendingCard;
+
+const Background = styled(motion.div)`
+  background: ${(props) => props.bg.large};
+  background-position: center;
+  background-size: cover;
+
+  @media (max-width: 34em) {
+    background: ${(props) => props.bg.small};
+    background-position: center;
+    background-size: cover;
+  }
+`;

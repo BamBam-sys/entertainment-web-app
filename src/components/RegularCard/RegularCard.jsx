@@ -8,6 +8,7 @@ import { ReactComponent as PlayIcon } from './../../assets/icon-play.svg';
 import './regularCard.scss';
 import { bookmark } from '../../store/showsSlice';
 import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
 
 const RegularCard = ({ item }) => {
   const dispatch = useDispatch();
@@ -20,22 +21,22 @@ const RegularCard = ({ item }) => {
     year,
     thumbnail: {
       regular: {
-        // small: smallBackground,
-        // medium: meidumBackground,
+        small: smallBackground,
+        medium: mediumBackground,
         large: largeBackground,
       },
     },
   } = item;
+
+  const bgStyles = {
+    large: `url(${largeBackground})`,
+    medium: `url(${mediumBackground})`,
+    small: `url(${smallBackground})`,
+  };
+
   return (
     <div className="regularCard">
-      <div
-        className="bg"
-        style={{
-          backgroundImage: `url(${largeBackground})`,
-          backgroundPosition: 'center',
-          backgroundSize: 'cover',
-        }}
-      >
+      <Background className="bg" bg={bgStyles}>
         <span className="play">
           <PlayIcon className="playIcon" />
           <p>play</p>
@@ -53,7 +54,7 @@ const RegularCard = ({ item }) => {
             />
           )}
         </span>
-      </div>
+      </Background>
       <div className="cardBody">
         <div className="info">
           <span>{year}</span>
@@ -72,3 +73,21 @@ const RegularCard = ({ item }) => {
 };
 
 export default RegularCard;
+
+const Background = styled.div`
+  background: ${(props) => props.bg.large};
+  background-position: center;
+  background-size: cover;
+
+  @media (max-width: 48em) {
+    background: ${(props) => props.bg.medium};
+    background-position: center;
+    background-size: cover;
+  }
+
+  @media (max-width: 34em) {
+    background: ${(props) => props.bg.small};
+    background-position: center;
+    background-size: cover;
+  }
+`;
