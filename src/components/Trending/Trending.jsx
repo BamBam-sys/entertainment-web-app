@@ -8,18 +8,15 @@ import { useSelector } from 'react-redux';
 const Trending = () => {
   const state = useSelector((state) => state);
   const trending = selectTrendingShows(state);
-  // const trending = data.filter((item) => item.isTrending === true);
 
   const [width, setWidth] = useState(0);
 
   const carouselRef = useRef();
+  const { current: ref } = carouselRef;
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    setWidth(
-      carouselRef.current?.scrollWidth - carouselRef.current?.offsetWidth
-    );
-  });
+    setWidth(ref?.scrollWidth - ref?.offsetWidth);
+  }, [ref]);
 
   return (
     <div className="trendingSection" ref={carouselRef}>

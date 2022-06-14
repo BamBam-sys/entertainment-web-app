@@ -26,15 +26,14 @@ const TrendingCard = ({ item }) => {
     },
   } = item;
 
+  const style = {
+    backgroundImage: `url(${largeBackground})`,
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+  };
+
   return (
-    <motion.div
-      className="trendingCard"
-      style={{
-        backgroundImage: `url(${largeBackground})`,
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-      }}
-    >
+    <motion.div className="trendingCard" style={style}>
       <span className="icon">
         {isBookmarked ? (
           <BookmarkIconFull
