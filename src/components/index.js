@@ -6,6 +6,7 @@ import Heading from './Heading/Heading';
 import TrendingCard from './TrendingCard/TrendingCard';
 import RegularCard from './RegularCard/RegularCard';
 import Search from './Search/Search';
+import Button from './Button/Button';
 
 export {
   Nav,
@@ -16,4 +17,5 @@ export {
   Heading,
   RegularCard,
   Search,
+  Button,
 };

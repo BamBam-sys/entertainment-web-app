@@ -1,0 +1,73 @@
+@import '../../scss/variables.scss';
+
+.logIn {
+  max-width: 40rem;
+  width: 90%;
+  margin: 7.84rem auto 0;
+  font-size: 1.5rem;
+
+  .logo {
+    margin: 0 auto 8.3rem;
+  }
+
+  p {
+    text-align: center;
+    margin-top: 2.4rem;
+    span {
+      color: $red;
+      cursor: pointer;
+    }
+  }
+
+  .logInForm {
+    background: $semiDarkBlue;
+    padding: 3.2rem;
+    border-radius: 20px;
+
+    .form {
+      margin-top: 4rem;
+      .inputField {
+        font-weight: 300;
+        position: relative;
+
+        input {
+          width: 100%;
+          padding: 1rem 1.7rem;
+          background: transparent;
+          color: $white;
+          caret-color: $red;
+          border: transparent;
+          border-bottom: 1px solid $greyishBlue;
+          margin-bottom: 2.4rem;
+          transition: all 500ms ease;
+
+          &:focus {
+            outline: none;
+            border-bottom: 1px solid $white;
+          }
+          &:-webkit-autofill,
+          &:-webkit-autofill:hover,
+          &:-webkit-autofill:focus,
+          &:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px $semiDarkBlue inset !important;
+            box-shadow: 0 0 0 1000px $semiDarkBlue inset;
+            -webkit-text-fill-color: $white;
+            transition: background-color 5000s ease-in-out 0s;
+          }
+
+          &.error {
+            border-color: $red;
+          }
+        }
+
+        span {
+          font-size: 1.3rem;
+          color: $red;
+          position: absolute;
+          right: 1rem;
+          top: 1.2rem;
+        }
+      }
+    }
+  }
+}

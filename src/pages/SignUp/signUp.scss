@@ -26,38 +26,46 @@
 
     .form {
       margin-top: 4rem;
-
-      input {
-        width: 100%;
-        padding: 1rem 1.7rem;
-        background: transparent;
-        color: $white;
-        caret-color: $red;
-        border: transparent;
-        border-bottom: 1px solid $greyishBlue;
+      .inputField {
         font-weight: 300;
-        margin-bottom: 2.4rem;
-        transition: all 500ms ease;
+        position: relative;
 
-        &:focus {
-          outline: none;
-          border-bottom: 1px solid $white;
+        input {
+          width: 100%;
+          padding: 1rem 1.7rem;
+          background: transparent;
+          color: $white;
+          caret-color: $red;
+          border: transparent;
+          border-bottom: 1px solid $greyishBlue;
+          margin-bottom: 2.4rem;
+          transition: all 500ms ease;
+
+          &:focus {
+            outline: none;
+            border-bottom: 1px solid $white;
+          }
+          &:-webkit-autofill,
+          &:-webkit-autofill:hover,
+          &:-webkit-autofill:focus,
+          &:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px $semiDarkBlue inset !important;
+            box-shadow: 0 0 0 1000px $semiDarkBlue inset;
+            -webkit-text-fill-color: $white;
+            transition: background-color 5000s ease-in-out 0s;
+          }
+
+          &.error {
+            border-color: $red;
+          }
         }
-      }
 
-      .btn {
-        width: 100%;
-        background: $red;
-        color: $white;
-        cursor: pointer;
-        padding: 1.5rem 0;
-        border: none;
-        border-radius: 6px;
-        transition: all 500ms ease;
-
-        &:hover {
-          background: $white;
-          color: $darkBlue;
+        span {
+          font-size: 1.3rem;
+          color: $red;
+          position: absolute;
+          right: 1rem;
+          top: 1.2rem;
         }
       }
     }
