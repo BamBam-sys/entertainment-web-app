@@ -11,7 +11,9 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(showsReceived(data));
+    dispatch((dispatch, getState) => {
+      dispatch({ type: 'showsReceived', payload: [1, 2, 3] });
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

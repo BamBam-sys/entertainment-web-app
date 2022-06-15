@@ -1,10 +1,12 @@
 import React from 'react';
 import { Button, Heading } from '../../components';
 import { useForm } from 'react-hook-form';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 import './signUp.scss';
 
 const SignUp = () => {
+  const auth = getAuth();
   const {
     register,
     handleSubmit,
@@ -17,18 +19,27 @@ const SignUp = () => {
       repeatPassword: '',
     },
   });
-
   const password = watch('password');
+
+  const submitForm = handleSubmit(async ({ email, password }) => {
+    try {
+      const response = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log(response);
+    } catch (error) {
+      alert(error.message);
+    }
+  });
 
   return (
     <div className="signUp">
       <Logo className="logo" />
       <div className="signUpForm">
         <Heading text={'Sign Up'} />
-        <form
-          className="form"
-          onSubmit={handleSubmit((data) => console.log(data))}
-        >
+        <form className="form" onSubmit={submitForm}>
           <div className="inputField">
             <input
               className={errors.email && 'error'}

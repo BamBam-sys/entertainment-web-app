@@ -2,9 +2,13 @@ import React from 'react';
 import { Button, Heading } from '../../components';
 import { useForm } from 'react-hook-form';
 import { ReactComponent as Logo } from '../../assets/logo.svg';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+
 import './logIn.scss';
 
 const LogIn = () => {
+  const auth = getAuth();
+
   const {
     register,
     handleSubmit,
@@ -17,15 +21,18 @@ const LogIn = () => {
     },
   });
 
+  const submitForm = handleSubmit(({ email, password }) => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((response) => console.log(response.user))
+      .catch((err) => alert(err.message));
+  });
+
   return (
     <div className="logIn">
       <Logo className="logo" />
       <div className="logInForm">
         <Heading text={'Login'} />
-        <form
-          className="form"
-          onSubmit={handleSubmit((data) => console.log(data))}
-        >
+        <form className="form" onSubmit={submitForm}>
           <div className="inputField">
             <input
               className={errors.email && 'error'}
