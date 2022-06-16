@@ -1,0 +1,15 @@
+@import '../../scss/variables.scss';
+
+.errorPage {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  h2 {
+    .link {
+      color: $red;
+    }
+  }
+}
