@@ -13,9 +13,10 @@
   p {
     text-align: center;
     margin-top: 2.4rem;
-    span {
+    .link {
       color: $red;
       cursor: pointer;
+      margin-left: 0.5rem;
     }
   }
 

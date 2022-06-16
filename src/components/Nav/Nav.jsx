@@ -5,14 +5,28 @@ import { ReactComponent as BookMarks } from '../../assets/icon-nav-bookmark.svg'
 import { ReactComponent as Movies } from '../../assets/icon-nav-movies.svg';
 import { ReactComponent as TvSeries } from '../../assets/icon-nav-tv-series.svg';
 import avatar from '../../assets/image-avatar.png';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import './nav.scss';
+import { useDispatch } from 'react-redux';
+import { userAuthenticated } from '../../store/userSlice';
+
 const Nav = () => {
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const handleLogOut = () => {
+    localStorage.clear();
+    dispatch(userAuthenticated({}));
+    navigate('/login');
+  };
+
   const navStyle = (isActive) => {
     return {
       style: isActive ? 'active' : '',
     };
   };
+
   return (
     <div className="nav">
       <Logo className="logo" />
@@ -30,7 +44,12 @@ const Nav = () => {
           <BookMarks className="navIcon" />
         </NavLink>
       </nav>
-      <img className="avatar" src={avatar} alt="avatar" />
+      <div>
+        <img className="avatar" src={avatar} alt="avatar" />
+        <span className="logout" onClick={handleLogOut}>
+          Logout
+        </span>
+      </div>
     </div>
   );
 };

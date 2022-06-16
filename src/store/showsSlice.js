@@ -32,26 +32,26 @@ export default showsSlice.reducer;
 
 //selectors
 export const selectShows = (state) => {
-  return state.reducer.shows.list;
+  return state.persistedReducer.shows.list;
 };
 
 export const selectTrendingShows = createSelector(
-  (state) => state.reducer.shows.list,
+  (state) => state.persistedReducer.shows.list,
   (trending) => trending.filter((item) => item.isTrending === true)
 );
 
 export const selectMovies = createSelector(
-  (state) => state.reducer.shows.list,
+  (state) => state.persistedReducer.shows.list,
   (shows) => shows.filter((show) => show.category === 'Movie')
 );
 
 export const selectTvSeries = createSelector(
-  (state) => state.reducer.shows.list,
+  (state) => state.persistedReducer.shows.list,
   (shows) => shows.filter((show) => show.category === 'TV Series')
 );
 
 export const selectBookmarkedMovies = createSelector(
-  (state) => state.reducer.shows.list,
+  (state) => state.persistedReducer.shows.list,
   (shows) =>
     shows.filter(
       (show) => show.category === 'Movie' && show.isBookmarked === true
@@ -59,7 +59,7 @@ export const selectBookmarkedMovies = createSelector(
 );
 
 export const selectBookmarkedTvSeries = createSelector(
-  (state) => state.reducer.shows.list,
+  (state) => state.persistedReducer.shows.list,
   (shows) =>
     shows.filter(
       (show) => show.category === 'TV Series' && show.isBookmarked === true
@@ -67,22 +67,22 @@ export const selectBookmarkedTvSeries = createSelector(
 );
 
 export const selectSearching = (state) => {
-  return state.reducer.shows.searching;
+  return state.persistedReducer.shows.searching;
 };
 
 // export const selectFilteredShows = createSelector(
-//   (state) => state.reducer.shows.list,
+//   (state) => state.persistedReducer.shows.list,
 //   (shows) => shows
 // );
 
 // export const selectFilteredMovies = createSelector(
 //   (state) =>
-//     state.reducer.shows.list.filter((show) => show.category === 'Movie'),
+//     state.persistedReducer.shows.list.filter((show) => show.category === 'Movie'),
 //   (movies) => movies
 // );
 
 // export const selectFilteredTvSeries = createSelector(
 //   (state) =>
-//     state.reducer.shows.list.filter((show) => show.category === 'TV Series'),
+//     state.persistedReducer.shows.list.filter((show) => show.category === 'TV Series'),
 //   (tvSeries) => tvSeries
 // );
