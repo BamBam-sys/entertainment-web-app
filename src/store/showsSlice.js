@@ -4,6 +4,7 @@ import { createSelector } from 'reselect';
 const initialState = {
   list: [],
   searching: false,
+  isLoading: false,
   searchParams: '',
 };
 
@@ -17,6 +18,9 @@ const showsSlice = createSlice({
     search: (shows, action) => {
       shows.searching = action.payload;
     },
+    loading: (shows, action) => {
+      shows.isLoading = action.payload;
+    },
     bookmark: (shows, action) => {
       const index = shows.list.findIndex(
         (show) => show.title === action.payload
@@ -26,7 +30,7 @@ const showsSlice = createSlice({
   },
 });
 
-export const { showsReceived, search, bookmark } = showsSlice.actions;
+export const { showsReceived, search, bookmark, loading } = showsSlice.actions;
 
 export default showsSlice.reducer;
 

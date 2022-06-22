@@ -52,7 +52,7 @@ const LogIn = () => {
   return (
     <>
       {isLoading ? (
-        <Loading />
+        <Loading text={'Logging you in...'} />
       ) : (
         <div className="logIn">
           <Logo className="logo" />

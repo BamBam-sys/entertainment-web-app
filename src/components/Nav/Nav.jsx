@@ -9,6 +9,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import './nav.scss';
 import { useDispatch } from 'react-redux';
 import { userAuthenticated } from '../../store/userSlice';
+import { showsReceived } from '../../store/showsSlice';
 
 const Nav = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const Nav = () => {
   const handleLogOut = () => {
     localStorage.clear();
     dispatch(userAuthenticated({}));
+    dispatch(showsReceived([]));
     navigate('/login');
   };
 
