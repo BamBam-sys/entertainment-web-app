@@ -74,19 +74,6 @@ export const selectSearching = (state) => {
   return state.persistedReducer.shows.searching;
 };
 
-// export const selectFilteredShows = createSelector(
-//   (state) => state.persistedReducer.shows.list,
-//   (shows) => shows
-// );
-
-// export const selectFilteredMovies = createSelector(
-//   (state) =>
-//     state.persistedReducer.shows.list.filter((show) => show.category === 'Movie'),
-//   (movies) => movies
-// );
-
-// export const selectFilteredTvSeries = createSelector(
-//   (state) =>
-//     state.persistedReducer.shows.list.filter((show) => show.category === 'TV Series'),
-//   (tvSeries) => tvSeries
-// );
+export const selectLoadingState = (state) => {
+  return state.persistedReducer.shows.isLoading;
+};

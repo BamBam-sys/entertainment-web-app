@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Heading } from '../../components';
 import { useForm } from 'react-hook-form';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 import './signUp.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { loading, userAuthenticated } from '../../store/userSlice';
 import { useNavigate, Link } from 'react-router-dom';
 import Loading from '../../components/Loading/Loading';
+import { signup } from '../../services/authService';
 
 const SignUp = () => {
   const dispatch = useDispatch();
+
+  const [loginError, setLoginError] = useState();
 
   const {
     persistedReducer: {
@@ -18,7 +20,6 @@ const SignUp = () => {
     },
   } = useSelector((state) => state);
 
-  const auth = getAuth();
   const {
     register,
     handleSubmit,
@@ -37,32 +38,36 @@ const SignUp = () => {
 
   const submitForm = handleSubmit(async ({ email, password }) => {
     dispatch(loading(true));
-    try {
-      const { user } = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
 
+    const { error, user } = await signup(email, password);
+
+    if (user) {
       dispatch(userAuthenticated({ email: user.email, userId: user.uid }));
-      localStorage.setItem('token', user.accessToken);
-      dispatch(loading(false));
       navigate('/');
-    } catch (error) {
-      alert(error.message);
+      dispatch(loading(false));
+    }
+
+    if (error) {
+      setLoginError(error.code);
       dispatch(loading(false));
     }
   });
 
+  loginError &&
+    setTimeout(() => {
+      setLoginError(null);
+    }, 3000);
+
   return (
     <>
       {isLoading ? (
-        <Loading />
+        <Loading text={'Logging you in'} />
       ) : (
         <div className="signUp">
           <Logo className="logo" />
           <div className="signUpForm">
             <Heading text={'Sign Up'} />
+            {loginError && <span className="loginError">{loginError}</span>}
             <form className="form" onSubmit={submitForm}>
               <div className="inputField">
                 <input

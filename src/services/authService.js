@@ -1,25 +1,31 @@
-// import { createUserWithEmailAndPassword } from "firebase/auth";
-// import { useDispatch } from "react-redux";
-// import { loading, userAuthenticated } from "../store/userSlice";
-// import { useNavigate } from 'react-router-dom';
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
 
-// const dispatch = useDispatch()
-// const navigate = useNavigate()
+const auth = getAuth();
 
-// export const registerUser = async ()=>{
-//     dispatch(loading(true));
-//     try {
-//       const { user } = await createUserWithEmailAndPassword(
-//         auth,
-//         email,
-//         password
-//       );
+export const login = async (email, password) => {
+  try {
+    const { user } = await signInWithEmailAndPassword(auth, email, password);
+    localStorage.setItem('token', user.accessToken);
+    return { user };
+  } catch (error) {
+    return { error };
+  }
+};
 
-//       dispatch(userAuthenticated({ email: user.email, userId: user.uid }));
-//       dispatch(loading(false));
-//       navigate('/');
-//     } catch (error) {
-//       alert(error.message);
-//       dispatch(loading(false));
-//     }
-// }
+export const signup = async (email, password) => {
+  try {
+    const { user } = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    localStorage.setItem('token', user.accessToken);
+    return { user };
+  } catch (error) {
+    return { error };
+  }
+};

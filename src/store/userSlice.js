@@ -21,3 +21,7 @@ const userSlice = createSlice({
 export const { userAuthenticated, loading } = userSlice.actions;
 
 export default userSlice.reducer;
+
+export const selectLoadingState = (state) => {
+  return state.persistedReducer.user.isLoading;
+};

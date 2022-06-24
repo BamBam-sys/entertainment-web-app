@@ -1,25 +1,26 @@
-import React from 'react';
-import { Button, Heading } from '../../components';
-import { useForm } from 'react-hook-form';
-import { ReactComponent as Logo } from '../../assets/logo.svg';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-
-import './logIn.scss';
-import { loading, userAuthenticated } from '../../store/userSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { useForm } from 'react-hook-form';
+import {
+  loading,
+  selectLoadingState,
+  userAuthenticated,
+} from '../../store/userSlice';
+import { Button, Heading } from '../../components';
 import Loading from './../../components/Loading/Loading';
+import { ReactComponent as Logo } from '../../assets/logo.svg';
+import './logIn.scss';
+import { login } from '../../services/authService';
 
 const LogIn = () => {
   const dispatch = useDispatch();
-  const auth = getAuth();
-  const {
-    persistedReducer: {
-      user: { isLoading },
-    },
-  } = useSelector((state) => state);
+  // const auth = getAuth();
+  const state = useSelector((state) => state);
+  const loadingState = selectLoadingState(state);
 
-  // const [loginError, setLoginError] = useState({});
+  const [loginError, setLoginError] = useState();
 
   const {
     register,
@@ -36,28 +37,47 @@ const LogIn = () => {
 
   const submitForm = handleSubmit(async ({ email, password }) => {
     dispatch(loading(true));
-    try {
-      const { user } = await signInWithEmailAndPassword(auth, email, password);
+
+    const { error, user } = await login(email, password);
+
+    if (user) {
       dispatch(userAuthenticated({ email: user.email, userId: user.uid }));
-      localStorage.setItem('token', user.accessToken);
       navigate('/');
       dispatch(loading(false));
-    } catch (error) {
-      alert(error.message);
-      // setLoginError(error);
+    }
+
+    if (error) {
+      setLoginError(error.code);
       dispatch(loading(false));
     }
+
+    // try {
+    //   const { user } = await signInWithEmailAndPassword(auth, email, password);
+    //   dispatch(userAuthenticated({ email: user.email, userId: user.uid }));
+    //   localStorage.setItem('token', user.accessToken);
+    //   navigate('/');
+    //   dispatch(loading(false));
+    // } catch (error) {
+    //   setLoginError(error.code);
+    //   dispatch(loading(false));
+    // }
   });
+
+  loginError &&
+    setTimeout(() => {
+      setLoginError(null);
+    }, 3000);
 
   return (
     <>
-      {isLoading ? (
+      {loadingState ? (
         <Loading text={'Logging you in...'} />
       ) : (
         <div className="logIn">
           <Logo className="logo" />
           <div className="logInForm">
             <Heading text={'Login'} />
+            {loginError && <span className="loginError">{loginError}</span>}
             <form className="form" onSubmit={submitForm}>
               <div className="inputField">
                 <input

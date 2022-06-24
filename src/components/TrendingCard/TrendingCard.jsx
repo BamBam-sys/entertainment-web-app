@@ -10,6 +10,7 @@ import tvSeriesIcon from './../../assets/icon-category-tv.svg';
 
 import styled from 'styled-components';
 import './trendingCard.scss';
+import { bookmarkShow } from '../../services/showsService';
 
 const TrendingCard = ({ item }) => {
   const dispatch = useDispatch();
@@ -29,18 +30,23 @@ const TrendingCard = ({ item }) => {
     small: `url(${smallBackground})`,
   };
 
+  const handleBookmark = async (title) => {
+    await bookmarkShow(title);
+    dispatch(bookmark(title));
+  };
+
   return (
     <Background className="trendingCard" bg={bgStyles}>
       <span className="icon">
         {isBookmarked ? (
           <BookmarkIconFull
             className="bookmarkIcon"
-            onClick={() => dispatch(bookmark(title))}
+            onClick={() => handleBookmark(title)}
           />
         ) : (
           <BookmarkIconEmpty
             className="bookmarkIcon"
-            onClick={() => dispatch(bookmark(title))}
+            onClick={() => handleBookmark(title)}
           />
         )}
       </span>

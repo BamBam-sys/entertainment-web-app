@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
 import reducer from './reducer';
-import api from './middleware/api';
 import {
   persistStore,
   persistReducer,
@@ -12,6 +11,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { test } from './middleware/test';
 
 const persistConfig = {
   key: 'root',
@@ -31,7 +31,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(api),
+    }).concat(test),
 });
 
 export const persistor = persistStore(store);

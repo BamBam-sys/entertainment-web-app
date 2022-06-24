@@ -5,6 +5,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import { database } from '../../firebaseConfig';
 import {
   loading,
+  selectLoadingState,
   selectSearching,
   selectShows,
   selectTrendingShows,
@@ -17,11 +18,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const state = useSelector((state) => state);
-  const {
-    persistedReducer: {
-      shows: { isLoading },
-    },
-  } = state;
+  const loadingState = selectLoadingState(state);
   const shows = selectShows(state);
   const trending = selectTrendingShows(state);
   const searching = selectSearching(state);
@@ -33,13 +30,12 @@ const Home = () => {
         const querySnapshot = await getDocs(collection(database, 'shows'));
         let shows = [];
         querySnapshot.forEach((doc) => {
-          // doc.data() is never undefined for query doc snapshots
           shows.push({ ...doc.data(), id: doc.id });
         });
         dispatch(showsReceived(shows));
         dispatch(loading(false));
       } catch (error) {
-        console.log(error);
+        console.log(error, 'errorrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
       }
     };
 
@@ -54,7 +50,7 @@ const Home = () => {
         placeholder={'Search for movies or TV series'}
         data={shows}
       />
-      {isLoading ? (
+      {loadingState ? (
         <Loading text={'Loading shows...'} />
       ) : (
         !searching && (

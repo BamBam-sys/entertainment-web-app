@@ -1,14 +1,16 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { bookmark } from '../../store/showsSlice';
+import { bookmarkShow } from '../../services/showsService';
+
 import { ReactComponent as MovieIcon } from './../../assets/icon-category-movie.svg';
 import { ReactComponent as TvSeriesIcon } from './../../assets/icon-category-tv.svg';
 import { ReactComponent as BookmarkIconEmpty } from './../../assets/icon-bookmark-empty.svg';
 import { ReactComponent as BookmarkIconFull } from './../../assets/icon-bookmark-full.svg';
 import { ReactComponent as PlayIcon } from './../../assets/icon-play.svg';
 
-import './regularCard.scss';
-import { bookmark } from '../../store/showsSlice';
-import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import './regularCard.scss';
 
 const RegularCard = ({ item }) => {
   const dispatch = useDispatch();
@@ -34,6 +36,11 @@ const RegularCard = ({ item }) => {
     small: `url(${smallBackground})`,
   };
 
+  const handleBookmark = async (title) => {
+    const response = await bookmarkShow(title);
+    if (!response) dispatch(bookmark(title));
+  };
+
   return (
     <div className="regularCard">
       <Background className="bg" bg={bgStyles}>
@@ -45,12 +52,12 @@ const RegularCard = ({ item }) => {
           {isBookmarked ? (
             <BookmarkIconFull
               className="bookmarkIcon"
-              onClick={() => dispatch(bookmark(title))}
+              onClick={() => handleBookmark(title)}
             />
           ) : (
             <BookmarkIconEmpty
               className="bookmarkIcon"
-              onClick={() => dispatch(bookmark(title))}
+              onClick={() => handleBookmark(title)}
             />
           )}
         </span>

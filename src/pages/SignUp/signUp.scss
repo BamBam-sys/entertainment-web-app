@@ -25,6 +25,14 @@
     padding: 3.2rem;
     border-radius: 20px;
 
+    .loginError {
+      display: inline-block;
+      margin-top: 2rem;
+      background: $red;
+      padding: 1rem 4rem;
+      border-radius: 8px;
+    }
+
     .form {
       margin-top: 4rem;
       .inputField {
