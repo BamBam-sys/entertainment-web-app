@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useForm } from 'react-hook-form';
 import {
   loading,
@@ -50,17 +49,6 @@ const LogIn = () => {
       setLoginError(error.code);
       dispatch(loading(false));
     }
-
-    // try {
-    //   const { user } = await signInWithEmailAndPassword(auth, email, password);
-    //   dispatch(userAuthenticated({ email: user.email, userId: user.uid }));
-    //   localStorage.setItem('token', user.accessToken);
-    //   navigate('/');
-    //   dispatch(loading(false));
-    // } catch (error) {
-    //   setLoginError(error.code);
-    //   dispatch(loading(false));
-    // }
   });
 
   loginError &&
