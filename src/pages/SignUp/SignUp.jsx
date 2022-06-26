@@ -12,7 +12,7 @@ import { signup } from '../../services/authService';
 const SignUp = () => {
   const dispatch = useDispatch();
 
-  const [loginError, setLoginError] = useState();
+  const [signupError, setSignupError] = useState();
 
   const {
     persistedReducer: {
@@ -48,14 +48,14 @@ const SignUp = () => {
     }
 
     if (error) {
-      setLoginError(error.code);
+      setSignupError(error.code);
       dispatch(loading(false));
     }
   });
 
-  loginError &&
+  signupError &&
     setTimeout(() => {
-      setLoginError(null);
+      setSignupError(null);
     }, 3000);
 
   return (
@@ -67,7 +67,7 @@ const SignUp = () => {
           <Logo className="logo" />
           <div className="signUpForm">
             <Heading text={'Sign Up'} />
-            {loginError && <span className="loginError">{loginError}</span>}
+            {signupError && <span className="signupError">{signupError}</span>}
             <form className="form" onSubmit={submitForm}>
               <div className="inputField">
                 <input
